@@ -3,6 +3,8 @@
 #ifndef Form_MainH
 #define Form_MainH
 //---------------------------------------------------------------------------
+#include "Form_Help.h"
+//---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -46,9 +48,11 @@ __published:	// IDE-managed Components
 	void __fastcall editHPChange(TObject *Sender);
 	void __fastcall editMPChange(TObject *Sender);
 private:	// User declarations
+	TFormHelp *help;
 public:		// User declarations
 	__fastcall TFormMain(TComponent* Owner);
 	void __fastcall FollowGameWindow();
+	void __fastcall ShowHelp();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TFormMain *FormMain;

@@ -25,6 +25,7 @@ int hp_alarm = 0, mp_alarm = 0;
 __fastcall TFormMain::TFormMain(TComponent* Owner)
 	: TForm(Owner)
 {
+	this->help = NULL;
 }
 //---------------------------------------------------------------------------
 void  __fastcall TFormMain::FollowGameWindow()
@@ -37,6 +38,15 @@ void  __fastcall TFormMain::FollowGameWindow()
 		this->Left += GetSystemMetrics(SM_CXSIZEFRAME) / 2;
 		this->Top += GetSystemMetrics(SM_CYSIZEFRAME) / 2;
 	}
+}
+//---------------------------------------------------------------------------
+void  __fastcall TFormMain::ShowHelp()
+{
+	if (this->help) {
+		delete this->help;
+	}
+	this->help = new TFormHelp(this);
+	this->help->ShowModel();
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCreate(TObject *Sender)

@@ -45,6 +45,9 @@ LRESULT WMHandler(HWND hwnd, UINT message,WPARAM wParam,LPARAM lParam)
 		case WM_KEYDOWN:
 			switch(wParam)
 			{
+				case VK_F1:
+					FormMain->ShowHelp();
+					break;
 				case VK_F2:
 					FormMain->chkProtect->Checked = !FormMain->chkProtect->Checked;
 					break;

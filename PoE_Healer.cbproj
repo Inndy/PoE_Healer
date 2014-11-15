@@ -100,6 +100,12 @@
 			<CppCompile Include="DllMain.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="Form_Help.cpp">
+				<Form>FormHelp</Form>
+				<FormType>dfm</FormType>
+				<DependentOn>Form_Help.h</DependentOn>
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="Form_Main.cpp">
 				<Form>FormMain</Form>
 				<FormType>dfm</FormType>
@@ -115,6 +121,7 @@
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<FormResources Include="Form_Main.dfm"/>
+			<FormResources Include="Form_Help.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
