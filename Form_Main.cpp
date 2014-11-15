@@ -11,6 +11,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+
+#define HP_COOLDOWN 6
+#define MP_COOLDOWN 15
 TFormMain *FormMain;
 int magic, hp, mp;
 extern HMODULE dllinst;
@@ -21,6 +24,7 @@ HWND *pGameHWND;
 int index_hp = 0, index_mp = 0;
 int key_modes[5] = {0};
 int hp_alarm = 0, mp_alarm = 0;
+int hp_cooldown = 0, mp_cooldown = 0;
 //---------------------------------------------------------------------------
 __fastcall TFormMain::TFormMain(TComponent* Owner)
 	: TForm(Owner)
@@ -94,24 +98,30 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 	if (chkProtect->Checked && GetForegroundWindow() == *pGameHWND) {
 		int i;
 
-		if (hp < hp_alarm) {
+        if (hp_cooldown > 0) {
+            hp_cooldown--;
+        } else if (hp < hp_alarm) {
 			for (i = index_hp; i < 10; i++) {
 				if (key_modes[i % 5] & 1) {
 					lblHP->Font->Style = TFontStyles() << fsBold;
 					Press(i % 5);
 					index_hp = (i + 1) % 5;
+                    hp_cooldown = HP_COOLDOWN;
 					break;
 				}
 			}
 		} else {
 			lblHP->Font->Style = TFontStyles();
 		}
-		if (mp < mp_alarm) {
+        if (mp_cooldown > 0) {
+            mp_cooldown--;
+        } else if (mp < mp_alarm) {
 			for (i = index_mp; i < 10; i++) {
 				if (key_modes[i % 5] & 2) {
 					lblMP->Font->Style = TFontStyles() << fsBold;
 					Press(i % 5);
 					index_mp = (i + 1) % 5;
+                    mp_cooldown = MP_COOLDOWN;
 					break;
 				}
 			}
