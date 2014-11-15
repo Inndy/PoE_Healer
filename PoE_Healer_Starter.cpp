@@ -19,6 +19,7 @@
 
 
 
+
 USEFORM("FormMain.cpp", MainForm);
 //---------------------------------------------------------------------------
 USEFORM("..\..\..\Desktop\BCB_XE2\Inndy's Hack Injector\FormMain.cpp", MainForm);
@@ -32,7 +33,7 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
 		Application->CreateForm(__classid(TMainForm), &MainForm);
-		Application->Run();
+        Application->Run();
 	}
 	catch (Exception &exception)
 	{

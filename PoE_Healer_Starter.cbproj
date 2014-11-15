@@ -3,7 +3,7 @@
 			<ProjectGuid>{14BD6CB8-CF92-4B9D-8063-53F23D4CDC94}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
 			<FrameworkType>VCL</FrameworkType>
-			<MainSource>Inndy.cpp</MainSource>
+			<MainSource>PoE_Healer_Starter.cpp</MainSource>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Release</Config>
 			<Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -118,16 +118,14 @@
 				<DependentOn>FormMain.h</DependentOn>
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="Inndy.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
-			<None Include="Inndy.manifest">
-				<ModuleName>New1.Inndy</ModuleName>
-			</None>
+			<None Include="Inndy.manifest"/>
 			<ResourceCompile Include="Inndy1.rc">
 				<Form>New1.Inndy.res</Form>
 				<BuildOrder>3</BuildOrder>
 			</ResourceCompile>
+			<CppCompile Include="PoE_Healer_Starter.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
 			<FormResources Include="FormMain.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
@@ -179,7 +177,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Source>
-						<Source Name="MainSource">Inndy.cpp</Source>
+						<Source Name="MainSource">PoE_Healer_Starter.cpp</Source>
 					</Source>
 				</CPlusPlusBuilder.Personality>
 				<Deployment/>
