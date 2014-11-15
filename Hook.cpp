@@ -9,6 +9,8 @@
 
 extern int magic, hp, mp;
 extern HWND *pGameHWND;
+int FixW7BugX = GetModuleHandle(L"kernelbase.dll") ? GetSystemMetrics(SM_CXSIZEFRAME) / 2 : 0;
+int FixW7BugY = GetModuleHandle(L"kernelbase.dll") ? GetSystemMetrics(SM_CYSIZEFRAME) / 2 : 0;
 
 SCRIPT_START(hook_get_magic)
     mov eax, [esi+0x14]
