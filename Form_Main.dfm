@@ -3596,7 +3596,7 @@ object FormMain: TFormMain
     end
   end
   object tmrDetect: TTimer
-    Interval = 250
+    Interval = 100
     OnTimer = tmrDetectTimer
   end
 end
