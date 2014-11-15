@@ -48,7 +48,6 @@ __published:	// IDE-managed Components
 	void __fastcall editHPChange(TObject *Sender);
 	void __fastcall editMPChange(TObject *Sender);
 private:	// User declarations
-	TFormHelp *help;
 public:		// User declarations
 	__fastcall TFormMain(TComponent* Owner);
 	void __fastcall FollowGameWindow();

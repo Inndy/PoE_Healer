@@ -29,7 +29,6 @@ int hp_cooldown = 0, mp_cooldown = 0;
 __fastcall TFormMain::TFormMain(TComponent* Owner)
 	: TForm(Owner)
 {
-	this->help = NULL;
 }
 //---------------------------------------------------------------------------
 void  __fastcall TFormMain::FollowGameWindow()
@@ -44,13 +43,17 @@ void  __fastcall TFormMain::FollowGameWindow()
 	}
 }
 //---------------------------------------------------------------------------
+DWORD WINAPI ShowHelpFormProc(LPVOID lpParameter)
+{
+    TFormHelp *help = new TFormHelp(NULL);
+	help->ShowModal();
+    delete help;
+    return 0;
+}
+//---------------------------------------------------------------------------
 void  __fastcall TFormMain::ShowHelp()
 {
-	if (this->help) {
-		delete this->help;
-	}
-	this->help = new TFormHelp(this);
-	this->help->ShowModal();
+    CreateThread(NULL, 0xFF, ShowHelpFormProc, NULL, 0, NULL);
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCreate(TObject *Sender)
