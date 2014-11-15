@@ -1,0 +1,22 @@
+Version: 71127db602a9a303cf01154ed3304263
+
+PathOfExile.exe+312D4C - 8B 46 14              - mov eax,[esi+14] // Å@¬Þ
+PathOfExile.exe+312D4F - 3B C1                 - cmp eax,ecx
+
+PathOfExile.exe+312D9A - 8B 46 14              - mov eax,[esi+14]
+PathOfExile.exe+312D9D - 3B C1                 - cmp eax,ecx
+
+
+PathOfExile.exe+2190CE - 8B 40 54              - mov eax,[eax+54] // HP
+PathOfExile.exe+2190D1 - 3B C1                 - cmp eax,ecx
+
+PathOfExile.exe+FC7C6 - 8B 46 78              - mov eax,[esi+78] // MP
+PathOfExile.exe+FC7C9 - 85 C0                 - test eax,eax
+
+
+PathOfExile.exe+4A8953 - 8B 35 F843AC00        - mov esi,[PathOfExile.exe+9A43F8] // HWND
+
+
+PathOfExile.exe+9A43F0 // HWND
+PathOfExile.exe+9A43F4 // HWND
+PathOfExile.exe+9A43F8 // HWND
