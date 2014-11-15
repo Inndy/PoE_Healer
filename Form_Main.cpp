@@ -46,7 +46,7 @@ void  __fastcall TFormMain::ShowHelp()
 		delete this->help;
 	}
 	this->help = new TFormHelp(this);
-	this->help->ShowModel();
+	this->help->ShowModal();
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCreate(TObject *Sender)
