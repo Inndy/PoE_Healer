@@ -54,11 +54,11 @@ void __fastcall TFormMain::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::Button1Click(TObject *Sender)
 {
-	 ComboBox1->ItemIndex = key_modes[0] = settings->ReadInteger("PoE_Healer", "KeyMode_1", 0);
-	 ComboBox2->ItemIndex = key_modes[1] = settings->ReadInteger("PoE_Healer", "KeyMode_2", 0);
-	 ComboBox3->ItemIndex = key_modes[2] = settings->ReadInteger("PoE_Healer", "KeyMode_3", 0);
-	 ComboBox4->ItemIndex = key_modes[3] = settings->ReadInteger("PoE_Healer", "KeyMode_4", 0);
-	 ComboBox5->ItemIndex = key_modes[4] = settings->ReadInteger("PoE_Healer", "KeyMode_5", 0);
+	ComboBox1->ItemIndex = key_modes[0] = settings->ReadInteger("PoE_Healer", "KeyMode_1", 0);
+	ComboBox2->ItemIndex = key_modes[1] = settings->ReadInteger("PoE_Healer", "KeyMode_2", 0);
+	ComboBox3->ItemIndex = key_modes[2] = settings->ReadInteger("PoE_Healer", "KeyMode_3", 0);
+	ComboBox4->ItemIndex = key_modes[3] = settings->ReadInteger("PoE_Healer", "KeyMode_4", 0);
+	ComboBox5->ItemIndex = key_modes[4] = settings->ReadInteger("PoE_Healer", "KeyMode_5", 0);
 
 	editHP->Text = IntToStr(hp_alarm = settings->ReadInteger("PoE_Healer", "HP", 0));
 	editMP->Text = IntToStr(mp_alarm = settings->ReadInteger("PoE_Healer", "MP", 0));
