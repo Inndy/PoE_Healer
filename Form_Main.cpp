@@ -27,12 +27,16 @@ __fastcall TFormMain::TFormMain(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void  __fastcall FollowGameWindow()
+void  __fastcall TFormMain::FollowGameWindow()
 {
 	RECT rect;
 	GetWindowRect(*pGameHWND, &rect);
-	this->Left = rect.right + FixW7BugX;
-	this->Top = rect.top + FixW7BugY;
+	this->Left = rect.right;
+	this->Top = rect.top;
+	if (GetModuleHandle(L"kernelbase.dll")) {
+		this->Left += GetSystemMetrics(SM_CXSIZEFRAME) / 2;
+		this->Top += GetSystemMetrics(SM_CYSIZEFRAME) / 2;
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCreate(TObject *Sender)
