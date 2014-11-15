@@ -55,15 +55,16 @@ void  __fastcall TFormMain::ShowHelp()
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCreate(TObject *Sender)
 {
+    Hook(poe_base);
+
 	TCHAR buffer[MAX_PATH] = TEXT("Powered By Inndy");
 	GetModuleFileName(dllinst, buffer, sizeof(buffer));
 	dll_path = ExtractFileDir(buffer);
-
 	settings = new TIniFile(dll_path + "\\PoE_Healer.ini");
 
-	Hook(poe_base);
-
 	Button1Click(Sender);
+
+    this->FollowGameWindow();
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::Button1Click(TObject *Sender)
