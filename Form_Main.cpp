@@ -16,6 +16,7 @@
 #define MP_COOLDOWN 15
 TFormMain *FormMain;
 int magic, hp, mp;
+int last_hp = 0, last_mp = 0;
 extern HMODULE dllinst;
 HMODULE poe_base = GetModuleHandle(TEXT("PathOfExile.exe"));
 TIniFile* settings;
@@ -104,7 +105,11 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 
         if (hp_cooldown > 0) {
             hp_cooldown--;
+            if (hp < (last_hp * 95 / 100)) {
+                hp_cooldown = 0;
+            }
         } else if (hp < hp_alarm) {
+            last_hp = hp;
 			for (i = index_hp; i < 10; i++) {
 				if (key_modes[i % 5] & 1) {
 					lblHP->Font->Style = TFontStyles() << fsBold;
@@ -119,7 +124,11 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 		}
         if (mp_cooldown > 0) {
             mp_cooldown--;
+            if (mp < (last_mp * 95 / 100)) {
+                mp_cooldown = 0;
+            }
         } else if (mp < mp_alarm) {
+            last_mp = mp;
 			for (i = index_mp; i < 10; i++) {
 				if (key_modes[i % 5] & 2) {
 					lblMP->Font->Style = TFontStyles() << fsBold;
