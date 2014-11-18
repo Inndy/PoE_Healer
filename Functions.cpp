@@ -19,3 +19,26 @@ void Press(int k)
     ip.ki.dwFlags |= KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(ip));
 }
+
+namespace Hack
+{
+    // MemoryRegion
+
+    DWORD MemoryRegion::QuerySize()
+    {
+        return this->QuerySize(this->next_region);
+    }
+
+    DWORD MemoryRegion::QuerySize(void *adr)
+    {
+        MEMORY_BASIC_INFORMATION mbi;
+        VirtualQuery(adr, &mbi, sizeof(mbi));
+        this->next_region = (void *)((char *)mbi.BaseAddress + mbi.RegionSize);
+        return mbi.RegionSize;
+    }
+
+    DWORD MemoryRegion::QuerySize(char *adr)
+    {
+        return this->QuerySize((void*)adr);
+    }
+}
