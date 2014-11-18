@@ -167,3 +167,11 @@ void __fastcall TFormMain::editMPChange(TObject *Sender)
 	mp_alarm = StrToInt(editMP->Text);
 }
 //---------------------------------------------------------------------------
+void __fastcall TFormMain::tmrInitializeTimer(TObject *Sender)
+{
+    if (hp > 0 && mp > 0) {
+        chkProtect->Checked = true;
+        tmrInitialize->Enabled = false;
+    }
+}
+//---------------------------------------------------------------------------

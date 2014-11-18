@@ -3599,4 +3599,9 @@ object FormMain: TFormMain
     Interval = 100
     OnTimer = tmrDetectTimer
   end
+  object tmrInitialize: TTimer
+    Interval = 100
+    OnTimer = tmrInitializeTimer
+    Left = 40
+  end
 end
