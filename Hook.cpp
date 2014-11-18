@@ -20,9 +20,9 @@ SCRIPT_START(hook_get_magic)
 SCRIPT_END
 
 SCRIPT_START(hook_get_hp)
-    mov eax, [eax+0x54]
+    mov eax, [esi+0x54]
     mov [hp], eax
-    cmp eax, ecx
+    test eax, eax
     ret
 SCRIPT_END
 
@@ -92,9 +92,9 @@ void MakeHook(HMODULE mod, DWORD offset, LPCVOID script, int nops)
 
 void Hook(HMODULE mod_poe)
 {
-    MakeHook(mod_poe, 0x312D9A, hook_get_magic, 0);
-    MakeHook(mod_poe, 0x2190CE, hook_get_hp   , 0);
-	MakeHook(mod_poe, 0x0FC7C6, hook_get_mp   , 0);
+    // MakeHook(mod_poe, 0x312D9A, hook_get_magic, 0);
+    MakeHook(mod_poe, 0xDC806 , hook_get_hp, 0);
+    MakeHook(mod_poe, 0x0FC7C6, hook_get_mp, 0);
 
 	pGameHWND = (HWND *)((char *)mod_poe + 0x9A43F8);
 

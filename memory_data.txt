@@ -10,6 +10,16 @@ PathOfExile.exe+312D9D - 3B C1                 - cmp eax,ecx
 PathOfExile.exe+2190CE - 8B 40 54              - mov eax,[eax+54] // HP
 PathOfExile.exe+2190D1 - 3B C1                 - cmp eax,ecx
 
+PathOfExile.exe+DC806 - 8B 46 54              - mov eax,[esi+54] // HP // Now This
+PathOfExile.exe+DC809 - 85 C0                 - test eax,eax
+
+
+PathOfExile.exe+311F79 - 0FAF 46 10            - imul eax,[esi+10] // HP
+
+PathOfExile.exe+311FA1 - 8B 4E 10              - mov ecx,[esi+10] // HP
+PathOfExile.exe+311FA4 - 2B 4E 1C              - sub ecx,[esi+1C]
+
+
 PathOfExile.exe+FC7C6 - 8B 46 78              - mov eax,[esi+78] // MP
 PathOfExile.exe+FC7C9 - 85 C0                 - test eax,eax
 
