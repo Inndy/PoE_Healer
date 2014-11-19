@@ -94,14 +94,14 @@ namespace Hack
         end -= feature_length;
 
         while (buffer < end && !found) {
-            found = true;
             for (i = 0; i < feature_length; i++) {
                 if ((buffer[i] & feature_mask[i]) != feature_bytes[i]) {
-                    found = false;
                     break;
                 }
             }
-            if (!found) {
+            if (i == feature_length) {
+                found = true;
+            } else {
                 buffer++;
             }
         }
