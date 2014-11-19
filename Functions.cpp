@@ -48,15 +48,28 @@ namespace Hack
 {
     // MemoryRegion
 
+    MemoryRegion::MemoryRegion()
+    {
+        this->region = NULL;
+        this->next_region = NULL;
+    }
+
+    MemoryRegion::MemoryRegion(void *region)
+    {
+        this->region = region;
+        this->next_region = NULL;
+    }
+
     DWORD MemoryRegion::QuerySize()
     {
-        return this->QuerySize(this->next_region);
+        return this->QuerySize(this->region);
     }
 
     DWORD MemoryRegion::QuerySize(void *adr)
     {
         MEMORY_BASIC_INFORMATION mbi;
         VirtualQuery(adr, &mbi, sizeof(mbi));
+        this->region = adr;
         this->next_region = (void *)((char *)mbi.BaseAddress + mbi.RegionSize);
         return mbi.RegionSize;
     }
@@ -64,6 +77,12 @@ namespace Hack
     DWORD MemoryRegion::QuerySize(char *adr)
     {
         return this->QuerySize((void*)adr);
+    }
+
+    MemoryRegion *MemoryRegion::NextRegion()
+    {
+        this->region = this->next_region;
+        return this;
     }
 
     // AobScanner

@@ -10,10 +10,14 @@ void Press(int k);
 namespace Hack {
     class MemoryRegion {
         public:
+            MemoryRegion();
+            MemoryRegion(void *region);
             DWORD QuerySize();
             DWORD QuerySize(void *adr);
             DWORD QuerySize(char *adr);
+            MemoryRegion *NextRegion();
         private:
+            void *region;
             void *next_region;
     };
 
