@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-
+#include <cstdio>
 #pragma hdrstop
 
 #include "Hook.h"
@@ -121,6 +121,21 @@ bool Hook(HMODULE mod_poe)
 	pGameHWND = *(HWND **)adr_get_hwnd;
 
     delete scanner;
+
+#ifdef DEBUG_MODE
+    char dump[4096];
+    sprintf(dump, "mod_poe = %p\n"
+                  "scan_size = %d\n"
+                  "offset_get_hp = %p\n"
+                  "offset_get_mp = %p\n"
+                  "adr_get_hwnd = %p\n",
+                  mod_poe,
+                  scan_size,
+                  offset_get_hp,
+                  offset_get_mp,
+                  adr_get_hwnd);
+    MessageBoxA(NULL, dump, "PoE Healer", MB_ICONINFORMATION);
+#endif
 
 	char window_text[1024];
 	while (true) {
