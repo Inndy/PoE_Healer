@@ -59,7 +59,17 @@ void  __fastcall TFormMain::ShowHelp()
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCreate(TObject *Sender)
 {
-    Hook(poe_base);
+    if (!poe_base) {
+        MessageBox(NULL, TEXT("這不是PoE"), TEXT("PoE Healer"),
+                   MB_OK | MB_ICONERROR | MB_SETFOREGROUND);
+        TerminateProcess(GetCurrentProcess(), 0);
+    }
+    bool result = Hook(poe_base);
+    if (!result) {
+        MessageBox(NULL, TEXT("輔助啟動失敗"), TEXT("PoE Healer"),
+                   MB_OK | MB_ICONERROR | MB_SETFOREGROUND);
+        TerminateProcess(GetCurrentProcess(), 0);
+    }
 
 	TCHAR buffer[MAX_PATH] = TEXT("Powered By Inndy");
 	GetModuleFileName(dllinst, buffer, sizeof(buffer));
