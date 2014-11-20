@@ -99,7 +99,7 @@ namespace Hack
         this->size = size;
     }
 
-    char *AobScanner::Scan(const char *feature, bool alignment, long offset)
+    bool AobScanner::Scan(const char *feature, char **out, bool alignment, long offset)
     {
         char *buffer = this->buffer, *end = this->buffer + this->size;
         long feature_length, t = strlen(feature);
@@ -128,7 +128,16 @@ namespace Hack
         delete [] feature_bytes;
         delete [] feature_mask;
 
-        return found ? buffer + offset : NULL;
+        *out = found ? buffer + offset : NULL;
+        return found;
+    }
+
+    bool AobScanner::ScanOffset(const char *feature, long *out, bool alignment, long offset)
+    {
+        char *result;
+        bool found = this->Scan(feature, &result, alignment, offset);
+        *out = result ? result - this->buffer : -1;
+        return found;
     }
 
     void AobScanner::ParseFeature(const char *feature, char *out, char *mask, long *len)
