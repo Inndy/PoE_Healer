@@ -66,7 +66,7 @@ void __fastcall TFormMain::FormCreate(TObject *Sender)
     }
     bool result = Hook(poe_base);
     if (!result) {
-        MessageBox(NULL, TEXT("輔助啟動失敗"), TEXT("PoE Healer"),
+        MessageBox(NULL, TEXT("輔助啟動失敗，可能需要更新或者與其他程式衝突"), TEXT("PoE Healer"),
                    MB_OK | MB_ICONERROR | MB_SETFOREGROUND);
         TerminateProcess(GetCurrentProcess(), 0);
     }
