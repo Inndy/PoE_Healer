@@ -3,6 +3,7 @@
 #pragma hdrstop
 
 #include "Hook.h"
+#include "Functions.h"
 #include "Form_Main.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -90,13 +91,36 @@ void MakeHook(HMODULE mod, DWORD offset, LPCVOID script, int nops)
     AsmCall((char *)mod + offset, script, nops);
 }
 
-void Hook(HMODULE mod_poe)
+bool Hook(HMODULE mod_poe)
 {
-    // MakeHook(mod_poe, 0x312D9A, hook_get_magic, 0);
-    MakeHook(mod_poe, 0xDC806 , hook_get_hp, 0);
-    MakeHook(mod_poe, 0x0FC7C6, hook_get_mp, 0);
+    // 8b ?? ?? 85 c0 89 44 ?? ?? 0f 9f ?? 88
+    long offset_get_hp, offset_get_mp;
+    char* adr_get_hwnd;
 
-	pGameHWND = (HWND *)((char *)mod_poe + 0x9A43F8);
+    Hack::MemoryRegion *mr = new Hack::MemoryRegion(mod_poe);
+    long scan_size = mr->QuerySize(); // PE head
+    scan_size += mr->NextRegion()->QuerySize(); // text section
+    scan_size += mr->NextRegion()->QuerySize(); // data section
+    delete mr;
+
+    Hack::AobScanner *scanner = new Hack::AobScanner(mod_poe, scan_size);
+
+    if (!scanner->ScanOffset("8b 46 54 85 c0 89 44 24", &offset_get_hp)) {
+        goto fail_scan;
+    }
+    MakeHook(mod_poe, offset_get_hp , hook_get_hp, 0);
+
+    if (!scanner->ScanOffset("8b 46 78 85 c0 89 44 24", &offset_get_mp)) {
+        goto fail_scan;
+    }
+    MakeHook(mod_poe, offset_get_mp, hook_get_mp, 0);
+
+    if (!scanner->Scan("8b 35 ?? ?? ?? ?? eb ?? 84", &adr_get_hwnd, false, 2)) {
+        goto fail_scan;
+    }
+	pGameHWND = *(HWND **)adr_get_hwnd;
+
+    delete scanner;
 
 	char window_text[1024];
 	while (true) {
@@ -109,4 +133,8 @@ void Hook(HMODULE mod_poe)
 			break;
 		}
     }
+    return true;
+fail_scan:
+    delete scanner;
+    return false;
 }
