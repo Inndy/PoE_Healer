@@ -30,3 +30,14 @@ PathOfExile.exe+4A8953 - 8B 35 F843AC00        - mov esi,[PathOfExile.exe+9A43F8
 PathOfExile.exe+9A43F0 // HWND
 PathOfExile.exe+9A43F4 // HWND
 PathOfExile.exe+9A43F8 // HWND
+
+
+
+006469E0 (WinMain)
+00646900
+00644110 (RealMain)
+00877800
+009A9120
+00866670
+00711E40
+004DC7E0
