@@ -169,12 +169,16 @@ void __fastcall TFormMain::ComboBox1Change(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::editHPChange(TObject *Sender)
 {
-	hp_alarm = StrToInt(editHP->Text);
+    if (editHP->Text.Length() > 0) {
+	    hp_alarm = StrToInt(editHP->Text);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::editMPChange(TObject *Sender)
 {
-	mp_alarm = StrToInt(editMP->Text);
+    if (editMP->Text.Length() > 0) {
+	    mp_alarm = StrToInt(editMP->Text);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::tmrInitializeTimer(TObject *Sender)
