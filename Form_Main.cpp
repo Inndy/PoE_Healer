@@ -107,6 +107,12 @@ void __fastcall TFormMain::Button2Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 {
+    static int rest = 0;
+
+    if (chkPressF->Checked) {
+        Press('F');
+    }
+
 	lblHP->Caption = IntToStr(hp);
 	lblMP->Caption = IntToStr(mp);
 
