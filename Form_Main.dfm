@@ -3600,7 +3600,7 @@ object FormMain: TFormMain
     Top = 374
     Width = 97
     Height = 17
-    Caption = #33258#21205#25353#37749' (S-F)'
+    Caption = #33258#21205#25353#37749' (F4)'
     TabOrder = 6
   end
   object tmrDetect: TTimer

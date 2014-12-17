@@ -54,6 +54,8 @@ LRESULT WMHandler(HWND hwnd, UINT message,WPARAM wParam,LPARAM lParam)
 				case VK_F2:
 					FormMain->chkProtect->Checked = !FormMain->chkProtect->Checked;
 					break;
+                case VK_F4:
+                    FormMain->chkPressF->Checked = !FormMain->chkPressF->Checked;
 				case VK_F12:
 					FormMain->Visible = !FormMain->Visible;
 					break;
