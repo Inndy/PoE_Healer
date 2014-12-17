@@ -109,7 +109,8 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 {
     static int rest = 0;
 
-    if (chkPressF->Checked) {
+    if (chkPressF->Checked && ++rest == 2) {
+        rest = 0;
         Press('F');
     }
 
