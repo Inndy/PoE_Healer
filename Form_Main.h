@@ -40,6 +40,7 @@ __published:	// IDE-managed Components
 	TLabel *Label10;
 	TLabel *lblMP;
     TTimer *tmrInitialize;
+    TCheckBox *chkPressF;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);

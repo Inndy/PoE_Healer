@@ -4,7 +4,7 @@ object FormMain: TFormMain
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'PoE Healer'
-  ClientHeight = 412
+  ClientHeight = 433
   ClientWidth = 137
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -3531,7 +3531,7 @@ object FormMain: TFormMain
   end
   object Button1: TButton
     Left = 8
-    Top = 374
+    Top = 397
     Width = 57
     Height = 25
     Caption = #35712#21462#35373#23450
@@ -3540,7 +3540,7 @@ object FormMain: TFormMain
   end
   object Button2: TButton
     Left = 71
-    Top = 374
+    Top = 397
     Width = 57
     Height = 25
     Caption = #20786#23384#35373#23450
@@ -3594,6 +3594,14 @@ object FormMain: TFormMain
       Font.Style = []
       ParentFont = False
     end
+  end
+  object chkPressF: TCheckBox
+    Left = 24
+    Top = 374
+    Width = 97
+    Height = 17
+    Caption = #33258#21205#25353#37749' (S-F)'
+    TabOrder = 6
   end
   object tmrDetect: TTimer
     Interval = 100
