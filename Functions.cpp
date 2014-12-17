@@ -32,7 +32,7 @@ char inline is_fuzzy(char ch) {
 
 void Press(int k)
 {
-	k = MapVirtualKey('1' + k, MAPVK_VK_TO_VSC);
+	k = MapVirtualKey(k, MAPVK_VK_TO_VSC);
 
 	INPUT ip = { 0 };
 	ip.type = INPUT_KEYBOARD;

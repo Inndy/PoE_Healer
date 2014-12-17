@@ -123,7 +123,7 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 			for (i = index_hp; i < 10; i++) {
 				if (key_modes[i % 5] & 1) {
 					lblHP->Font->Style = TFontStyles() << fsBold;
-					Press(i % 5);
+					Press('1' + (i % 5));
 					index_hp = (i + 1) % 5;
                     hp_cooldown = HP_COOLDOWN;
 					break;
@@ -142,7 +142,7 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
 			for (i = index_mp; i < 10; i++) {
 				if (key_modes[i % 5] & 2) {
 					lblMP->Font->Style = TFontStyles() << fsBold;
-					Press(i % 5);
+					Press('1' + (i % 5));
 					index_mp = (i + 1) % 5;
                     mp_cooldown = MP_COOLDOWN;
 					break;
