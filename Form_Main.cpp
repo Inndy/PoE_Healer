@@ -28,26 +28,26 @@ int hp_alarm = 0, mp_alarm = 0;
 int hp_cooldown = 0, mp_cooldown = 0;
 //---------------------------------------------------------------------------
 __fastcall TFormMain::TFormMain(TComponent* Owner)
-	: TForm(Owner)
+    : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
 void  __fastcall TFormMain::FollowGameWindow()
 {
-	RECT rect;
-	GetWindowRect(*pGameHWND, &rect);
-	this->Left = rect.right;
-	this->Top = rect.top;
-	if (GetModuleHandle(L"kernelbase.dll")) {
-		this->Left += GetSystemMetrics(SM_CXSIZEFRAME) / 2;
-		this->Top += GetSystemMetrics(SM_CYSIZEFRAME) / 2;
-	}
+    RECT rect;
+    GetWindowRect(*pGameHWND, &rect);
+    this->Left = rect.right;
+    this->Top = rect.top;
+    if (GetModuleHandle(L"kernelbase.dll")) {
+        this->Left += GetSystemMetrics(SM_CXSIZEFRAME) / 2;
+        this->Top += GetSystemMetrics(SM_CYSIZEFRAME) / 2;
+    }
 }
 //---------------------------------------------------------------------------
 DWORD WINAPI ShowHelpFormProc(LPVOID lpParameter)
 {
     TFormHelp *help = new TFormHelp(NULL);
-	help->ShowModal();
+    help->ShowModal();
     delete help;
     return 0;
 }
@@ -71,37 +71,37 @@ void __fastcall TFormMain::FormCreate(TObject *Sender)
         TerminateProcess(GetCurrentProcess(), 0);
     }
 
-	TCHAR buffer[MAX_PATH] = TEXT("Powered By Inndy");
-	GetModuleFileName(dllinst, buffer, sizeof(buffer));
-	dll_path = ExtractFileDir(buffer);
-	settings = new TIniFile(dll_path + "\\PoE_Healer.ini");
+    TCHAR buffer[MAX_PATH] = TEXT("Powered By Inndy");
+    GetModuleFileName(dllinst, buffer, sizeof(buffer));
+    dll_path = ExtractFileDir(buffer);
+    settings = new TIniFile(dll_path + "\\PoE_Healer.ini");
 
-	Button1Click(Sender);
+    Button1Click(Sender);
 
     this->FollowGameWindow();
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::Button1Click(TObject *Sender)
 {
-	ComboBox1->ItemIndex = key_modes[0] = settings->ReadInteger("PoE_Healer", "KeyMode_1", 0);
-	ComboBox2->ItemIndex = key_modes[1] = settings->ReadInteger("PoE_Healer", "KeyMode_2", 0);
-	ComboBox3->ItemIndex = key_modes[2] = settings->ReadInteger("PoE_Healer", "KeyMode_3", 0);
-	ComboBox4->ItemIndex = key_modes[3] = settings->ReadInteger("PoE_Healer", "KeyMode_4", 0);
-	ComboBox5->ItemIndex = key_modes[4] = settings->ReadInteger("PoE_Healer", "KeyMode_5", 0);
+    ComboBox1->ItemIndex = key_modes[0] = settings->ReadInteger("PoE_Healer", "KeyMode_1", 0);
+    ComboBox2->ItemIndex = key_modes[1] = settings->ReadInteger("PoE_Healer", "KeyMode_2", 0);
+    ComboBox3->ItemIndex = key_modes[2] = settings->ReadInteger("PoE_Healer", "KeyMode_3", 0);
+    ComboBox4->ItemIndex = key_modes[3] = settings->ReadInteger("PoE_Healer", "KeyMode_4", 0);
+    ComboBox5->ItemIndex = key_modes[4] = settings->ReadInteger("PoE_Healer", "KeyMode_5", 0);
 
-	editHP->Text = IntToStr(hp_alarm = settings->ReadInteger("PoE_Healer", "HP", 0));
-	editMP->Text = IntToStr(mp_alarm = settings->ReadInteger("PoE_Healer", "MP", 0));
+    editHP->Text = IntToStr(hp_alarm = settings->ReadInteger("PoE_Healer", "HP", 0));
+    editMP->Text = IntToStr(mp_alarm = settings->ReadInteger("PoE_Healer", "MP", 0));
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::Button2Click(TObject *Sender)
 {
-	settings->WriteInteger("PoE_Healer", "KeyMode_1", ComboBox1->ItemIndex);
-	settings->WriteInteger("PoE_Healer", "KeyMode_2", ComboBox2->ItemIndex);
-	settings->WriteInteger("PoE_Healer", "KeyMode_3", ComboBox3->ItemIndex);
-	settings->WriteInteger("PoE_Healer", "KeyMode_4", ComboBox4->ItemIndex);
-	settings->WriteInteger("PoE_Healer", "KeyMode_5", ComboBox5->ItemIndex);
+    settings->WriteInteger("PoE_Healer", "KeyMode_1", ComboBox1->ItemIndex);
+    settings->WriteInteger("PoE_Healer", "KeyMode_2", ComboBox2->ItemIndex);
+    settings->WriteInteger("PoE_Healer", "KeyMode_3", ComboBox3->ItemIndex);
+    settings->WriteInteger("PoE_Healer", "KeyMode_4", ComboBox4->ItemIndex);
+    settings->WriteInteger("PoE_Healer", "KeyMode_5", ComboBox5->ItemIndex);
 
-	settings->WriteString("PoE_Healer", "HP", editHP->Text);
+    settings->WriteString("PoE_Healer", "HP", editHP->Text);
     settings->WriteString("PoE_Healer", "MP", editMP->Text);
 }
 //---------------------------------------------------------------------------
@@ -114,11 +114,11 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
         Press('F');
     }
 
-	lblHP->Caption = IntToStr(hp);
-	lblMP->Caption = IntToStr(mp);
+    lblHP->Caption = IntToStr(hp);
+    lblMP->Caption = IntToStr(mp);
 
-	if (chkProtect->Checked && GetForegroundWindow() == *pGameHWND) {
-		int i;
+    if (chkProtect->Checked && GetForegroundWindow() == *pGameHWND) {
+        int i;
 
         if (hp_cooldown > 0) {
             hp_cooldown--;
@@ -127,18 +127,18 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
             }
         } else if (hp < hp_alarm) {
             last_hp = hp;
-			for (i = index_hp; i < 10; i++) {
-				if (key_modes[i % 5] & 1) {
-					lblHP->Font->Style = TFontStyles() << fsBold;
-					Press('1' + (i % 5));
-					index_hp = (i + 1) % 5;
+            for (i = index_hp; i < 10; i++) {
+                if (key_modes[i % 5] & 1) {
+                    lblHP->Font->Style = TFontStyles() << fsBold;
+                    Press('1' + (i % 5));
+                    index_hp = (i + 1) % 5;
                     hp_cooldown = HP_COOLDOWN;
-					break;
-				}
-			}
-		} else {
-			lblHP->Font->Style = TFontStyles();
-		}
+                    break;
+                }
+            }
+        } else {
+            lblHP->Font->Style = TFontStyles();
+        }
         if (mp_cooldown > 0) {
             mp_cooldown--;
             if (mp < (last_mp * 95 / 100)) {
@@ -146,45 +146,45 @@ void __fastcall TFormMain::tmrDetectTimer(TObject *Sender)
             }
         } else if (mp < mp_alarm) {
             last_mp = mp;
-			for (i = index_mp; i < 10; i++) {
-				if (key_modes[i % 5] & 2) {
-					lblMP->Font->Style = TFontStyles() << fsBold;
-					Press('1' + (i % 5));
-					index_mp = (i + 1) % 5;
+            for (i = index_mp; i < 10; i++) {
+                if (key_modes[i % 5] & 2) {
+                    lblMP->Font->Style = TFontStyles() << fsBold;
+                    Press('1' + (i % 5));
+                    index_mp = (i + 1) % 5;
                     mp_cooldown = MP_COOLDOWN;
-					break;
-				}
-			}
-		} else {
-			lblMP->Font->Style = TFontStyles();
-		}
-	}
+                    break;
+                }
+            }
+        } else {
+            lblMP->Font->Style = TFontStyles();
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
-	CanClose = false;
-	this->Hide();
+    CanClose = false;
+    this->Hide();
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::ComboBox1Change(TObject *Sender)
 {
-	TComboBox *s = (TComboBox *)Sender;
-	key_modes[s->Tag] = s->ItemIndex;
-	index_hp = index_mp = 0;
+    TComboBox *s = (TComboBox *)Sender;
+    key_modes[s->Tag] = s->ItemIndex;
+    index_hp = index_mp = 0;
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::editHPChange(TObject *Sender)
 {
     if (editHP->Text.Length() > 0) {
-	    hp_alarm = StrToInt(editHP->Text);
+        hp_alarm = StrToInt(editHP->Text);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::editMPChange(TObject *Sender)
 {
     if (editMP->Text.Length() > 0) {
-	    mp_alarm = StrToInt(editMP->Text);
+        mp_alarm = StrToInt(editMP->Text);
     }
 }
 //---------------------------------------------------------------------------

@@ -32,16 +32,16 @@ char inline is_fuzzy(char ch) {
 
 void Press(int k)
 {
-	k = MapVirtualKey(k, MAPVK_VK_TO_VSC);
+    k = MapVirtualKey(k, MAPVK_VK_TO_VSC);
 
-	INPUT ip = { 0 };
-	ip.type = INPUT_KEYBOARD;
-	ip.ki.wScan = k;
-	ip.ki.dwFlags = KEYEVENTF_SCANCODE;
+    INPUT ip = { 0 };
+    ip.type = INPUT_KEYBOARD;
+    ip.ki.wScan = k;
+    ip.ki.dwFlags = KEYEVENTF_SCANCODE;
 
-	SendInput(1, &ip, sizeof(ip));
+    SendInput(1, &ip, sizeof(ip));
     ip.ki.dwFlags |= KEYEVENTF_KEYUP;
-	SendInput(1, &ip, sizeof(ip));
+    SendInput(1, &ip, sizeof(ip));
 }
 
 namespace Hack

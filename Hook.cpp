@@ -40,53 +40,53 @@ WNDPROC org_WMHandler;
 
 LRESULT WMHandler(HWND hwnd, UINT message,WPARAM wParam,LPARAM lParam)
 {
-	switch(message)
-	{
-		case WM_MOVE:
-			FormMain->FollowGameWindow();
-			break;
-		case WM_KEYDOWN:
-			switch(wParam)
-			{
-				case VK_F1:
-					FormMain->ShowHelp();
-					break;
-				case VK_F2:
-					FormMain->chkProtect->Checked = !FormMain->chkProtect->Checked;
-					break;
+    switch(message)
+    {
+        case WM_MOVE:
+            FormMain->FollowGameWindow();
+            break;
+        case WM_KEYDOWN:
+            switch(wParam)
+            {
+                case VK_F1:
+                    FormMain->ShowHelp();
+                    break;
+                case VK_F2:
+                    FormMain->chkProtect->Checked = !FormMain->chkProtect->Checked;
+                    break;
                 case VK_F4:
                     FormMain->chkPressF->Checked = !FormMain->chkPressF->Checked;
                     break;
-				case VK_F12:
-					FormMain->Visible = !FormMain->Visible;
-					break;
+                case VK_F12:
+                    FormMain->Visible = !FormMain->Visible;
+                    break;
             }
-			break;
-		case WM_CLOSE:
-			TerminateProcess(GetCurrentProcess(), 0);
-			break;
-	}
+            break;
+        case WM_CLOSE:
+            TerminateProcess(GetCurrentProcess(), 0);
+            break;
+    }
 
-	return org_WMHandler(hwnd, message, wParam, lParam);
+    return org_WMHandler(hwnd, message, wParam, lParam);
 }
 
 void WriteMemory(void *lpAddress, void *lpBuffer, int lpSize)
 {
-	DWORD OldProtection;
-	VirtualProtect(lpAddress,lpSize,PAGE_EXECUTE_READWRITE, &OldProtection);
-	memcpy(lpAddress,lpBuffer,lpSize);
-	VirtualProtect(lpAddress,lpSize,OldProtection, &OldProtection);
+    DWORD OldProtection;
+    VirtualProtect(lpAddress,lpSize,PAGE_EXECUTE_READWRITE, &OldProtection);
+    memcpy(lpAddress,lpBuffer,lpSize);
+    VirtualProtect(lpAddress,lpSize,OldProtection, &OldProtection);
 }
 
 void AsmCall(char * lpAddress, LPCVOID Function, unsigned Nops)
 {
-	DWORD OldProtection;
-	VirtualProtect((LPVOID)lpAddress,10,PAGE_EXECUTE_READWRITE, &OldProtection);
-	*(LPBYTE)lpAddress = 0xE8;
-	*(LPDWORD)(lpAddress + 1) = (DWORD)Function - (DWORD)lpAddress - 5;
-	if ((bool)Nops)
-		memset(((LPBYTE)lpAddress + 5), 0x90, Nops);
-	VirtualProtect((LPVOID)lpAddress,10,OldProtection, &OldProtection);
+    DWORD OldProtection;
+    VirtualProtect((LPVOID)lpAddress,10,PAGE_EXECUTE_READWRITE, &OldProtection);
+    *(LPBYTE)lpAddress = 0xE8;
+    *(LPDWORD)(lpAddress + 1) = (DWORD)Function - (DWORD)lpAddress - 5;
+    if ((bool)Nops)
+        memset(((LPBYTE)lpAddress + 5), 0x90, Nops);
+    VirtualProtect((LPVOID)lpAddress,10,OldProtection, &OldProtection);
 }
 
 void MakeHook(HMODULE mod, DWORD offset, LPCVOID script, int nops)
@@ -121,7 +121,7 @@ bool Hook(HMODULE mod_poe)
     if (!scanner->Scan("8b 35 ?? ?? ?? ?? eb ?? 84", &adr_get_hwnd, false, 2)) {
         goto fail_scan;
     }
-	pGameHWND = *(HWND **)adr_get_hwnd;
+    pGameHWND = *(HWND **)adr_get_hwnd;
 
     delete scanner;
 
@@ -140,16 +140,16 @@ bool Hook(HMODULE mod_poe)
     MessageBoxA(NULL, dump, "PoE Healer", MB_ICONINFORMATION);
 #endif
 
-	char window_text[1024];
-	while (true) {
-		GetWindowTextA(*pGameHWND, window_text, sizeof(window_text));
-		if (strcmp(window_text, "Path of Exile") == 0) {
-			org_WMHandler = (WNDPROC)GetWindowLongW(*pGameHWND, GWL_WNDPROC);
-			SetWindowLongW(*pGameHWND, GWL_WNDPROC, (long)WMHandler);
-			SetWindowPos(*pGameHWND, 0, FixW7BugX, FixW7BugY, 0, 0,
-					     SWP_NOSIZE | SWP_NOSENDCHANGING | SWP_NOZORDER);
-			break;
-		}
+    char window_text[1024];
+    while (true) {
+        GetWindowTextA(*pGameHWND, window_text, sizeof(window_text));
+        if (strcmp(window_text, "Path of Exile") == 0) {
+            org_WMHandler = (WNDPROC)GetWindowLongW(*pGameHWND, GWL_WNDPROC);
+            SetWindowLongW(*pGameHWND, GWL_WNDPROC, (long)WMHandler);
+            SetWindowPos(*pGameHWND, 0, FixW7BugX, FixW7BugY, 0, 0,
+                         SWP_NOSIZE | SWP_NOSENDCHANGING | SWP_NOZORDER);
+            break;
+        }
     }
     return true;
 fail_scan:

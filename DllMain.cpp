@@ -28,20 +28,20 @@
 //---------------------------------------------------------------------------
 DWORD WINAPI ShowFormProc(LPVOID lpParameter)
 {
-	extern TFormMain *FormMain;
-	FormMain = new TFormMain(Application);
-	FormMain->ShowModal();
-	return 1;
+    extern TFormMain *FormMain;
+    FormMain = new TFormMain(Application);
+    FormMain->ShowModal();
+    return 1;
 }
 //---------------------------------------------------------------------------
 HINSTANCE dllinst;
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
 {
-	if(reason == DLL_PROCESS_ATTACH)
-	{
-		dllinst = hinst;
-		CreateThread(NULL, 0xFF, ShowFormProc, NULL, 0, NULL);
-	}
-	return 1;
+    if(reason == DLL_PROCESS_ATTACH)
+    {
+        dllinst = hinst;
+        CreateThread(NULL, 0xFF, ShowFormProc, NULL, 0, NULL);
+    }
+    return 1;
 }
 //---------------------------------------------------------------------------
